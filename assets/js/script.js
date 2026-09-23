@@ -28,7 +28,7 @@
       if (e.key === "Escape") closeNav();
     });
   }
-
+  
   /* ---------- Sticky header shadow on scroll ---------- */
   var header = document.getElementById("site-header");
   if (header) {
