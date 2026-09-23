@@ -8,27 +8,49 @@
   /* ---------- Mobile nav toggle ---------- */
   var navToggle = document.getElementById("nav-toggle");
   var mainNav = document.getElementById("main-nav");
+  var navBackdrop = document.getElementById("navBackdrop");
+
+  function openNav() {
+    mainNav.classList.add("is-open");
+    navToggle.classList.add("is-active");
+    navToggle.setAttribute("aria-expanded", "true");
+    navToggle.setAttribute("aria-label", "Close menu");
+    navBackdrop.hidden = false;
+    // next frame, so the opacity transition actually runs
+    requestAnimationFrame(function () { navBackdrop.classList.add("is-open"); });
+    document.body.classList.add("nav-open");
+  }
 
   function closeNav() {
     mainNav.classList.remove("is-open");
+    navToggle.classList.remove("is-active");
     navToggle.setAttribute("aria-expanded", "false");
+    navToggle.setAttribute("aria-label", "Open menu");
+    navBackdrop.classList.remove("is-open");
+    document.body.classList.remove("nav-open");
+    setTimeout(function () { navBackdrop.hidden = true; }, 300);
   }
 
-  if (navToggle && mainNav) {
+  if (navToggle && mainNav && navBackdrop) {
     navToggle.addEventListener("click", function () {
-      var isOpen = mainNav.classList.toggle("is-open");
-      navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+      if (mainNav.classList.contains("is-open")) {
+        closeNav();
+      } else {
+        openNav();
+      }
     });
 
     mainNav.querySelectorAll("a").forEach(function (link) {
       link.addEventListener("click", closeNav);
     });
 
+    navBackdrop.addEventListener("click", closeNav);
+
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape") closeNav();
     });
   }
-  
+
   /* ---------- Sticky header shadow on scroll ---------- */
   var header = document.getElementById("site-header");
   if (header) {
