@@ -1,0 +1,6 @@
+{
+  "name": "Zeba Mehndi Studio",
+  "description": "Premier Mehndi Artist in Lucknow & Aminabad offering bespoke bridal, Arabic, and traditional henna artistry.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
